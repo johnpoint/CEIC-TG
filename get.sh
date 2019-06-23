@@ -13,8 +13,9 @@ sdd=${sd#'<td align="center">'}
 timee=`sed -n '1p'  timee | sed 's/^[ \t]*//g'`
 timeee=${timee#'<td align="center" style="width: 155px;">'}
 rm zhenji sd wz timee source
-echo ${timeee%'</td>'} > report
-echo ${wzz%'</td>'} "发生地震" >> report
+echo "地震速报:" > report
+echo "时间: "${timeee%'</td>'} >> report
+echo "位置: "${wzz%'</td>'} >> report
 echo "震级(M): "${zj%'</td>'} >> report
 echo "震源深度: "${sdd%'</td>'} "km" >> report
 re=`cat report`
