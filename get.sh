@@ -16,7 +16,7 @@ sd=`sed -n '1p'  sd | sed 's/^[ \t]*//g'`
 sdd=${sd#'<td align="center">'}
 timee=`sed -n '1p'  timee | sed 's/^[ \t]*//g'`
 timeee=${timee#'<td align="center" style="width: 155px;">'}
-cp ys archives/${timeee%'</td>'}
+cp ys archives/"${timeee%'</td>'}"
 rm zhenji sd wz timee source ys
 if [[ ${timeee%'</td>'} == "" ]]; then
 exit
