@@ -1,9 +1,13 @@
 mv report report.bak
 curl -H 'Cache-Control: no-cache' http://news.ceic.ac.cn/ > source
 cat source | grep '<td align="center" style="padding-left: 20px">' > zhenji
+cat source | grep '<td align="center" style="padding-left: 20px">' > ys
 cat source | grep '<td align="center" style="width: 155px;">' > timee
+cat source | grep '<td align="center" style="width: 155px;">' >> ys
 cat source | grep '<td align="center">' > sd
+cat source | grep '<td align="center">' >> ys
 cat source | grep '<td align="left"><a href="' > wz
+cat source | grep '<td align="left"><a href="' >> ys
 zhenji=`sed -n '1p'  zhenji | sed 's/^[ \t]*//g'`
 zj=${zhenji#'<td align="center" style="padding-left: 20px">'}
 wz=`sed -n '1p'  wz | sed 's/^[ \t]*//g'`
@@ -12,7 +16,8 @@ sd=`sed -n '1p'  sd | sed 's/^[ \t]*//g'`
 sdd=${sd#'<td align="center">'}
 timee=`sed -n '1p'  timee | sed 's/^[ \t]*//g'`
 timeee=${timee#'<td align="center" style="width: 155px;">'}
-rm zhenji sd wz timee source
+cp ys archives/${timeee%'</td>'}
+rm zhenji sd wz timee source ys
 if [[ ${timeee%'</td>'} == "" ]]; then
 exit
 fi
